@@ -1,6 +1,7 @@
 {
   "name": "habit-tracker",
   "version": "0.1.0",
+  "author": "Martín Mármol",
   "private": true,
   "scripts": {
     "dev": "next dev",

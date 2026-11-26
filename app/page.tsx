@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import HabitList from "./components/HabitList";
+import HabitList from "./components/HabitList/HabitList";
 import TodayDate from "./components/TodayDate";
 
 export default function Home() {
