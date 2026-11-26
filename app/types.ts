@@ -16,3 +16,7 @@ export interface Completion {
   habitId: string;
   date: string;
 }
+
+export interface SetHabitCompletion extends Completion {
+  completed: boolean;
+}

@@ -1,22 +1,22 @@
 "use client";
 
-import { Habit, HabitWithCompleted } from "@/app/types";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { HabitsResponse } from "@/app/types";
+import { setHabitCompletion } from "@/app/lib/actions";
 
-export default function CheckList({
-  habits,
-}: {
-  habits: HabitWithCompleted[];
-}) {
+export default function CheckList({ habits, date }: HabitsResponse) {
   const [items, setItems] = useState(habits);
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const updatedItems = items.map((habit) =>
-      habit.id === event.target.id
-        ? { ...habit, completed: !habit.completed }
-        : habit,
+  const handleCheckboxChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const { id, checked } = event.target;
+
+    setItems((prevItems) =>
+      prevItems.map((habit) =>
+        habit.id === id ? { ...habit, completed: checked } : habit,
+      ),
     );
-    setItems(updatedItems);
+
+    await setHabitCompletion({ completed: checked, date, habitId: id });
   };
 
   return (
@@ -35,10 +35,10 @@ export default function CheckList({
         ))}
       </ul>
 
-      <section>
+      <p>
         {items.filter((h) => h.completed).length} de {items.length} habitos
         completados
-      </section>
+      </p>
     </>
   );
 }

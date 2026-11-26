@@ -12,7 +12,7 @@ const completions: Completion[] = [
 ];
 
 export async function getHabits(date: string): Promise<HabitsResponse> {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   return {
     date,
