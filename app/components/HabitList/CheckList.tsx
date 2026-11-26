@@ -10,9 +10,11 @@ export default function CheckList({
 }) {
   const [items, setItems] = useState(habits);
 
-  const handleCheckboxChange = (habitId: Habit["id"]) => {
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedItems = items.map((habit) =>
-      habit.id === habitId ? { ...habit, completed: !habit.completed } : habit,
+      habit.id === event.target.id
+        ? { ...habit, completed: !habit.completed }
+        : habit,
     );
     setItems(updatedItems);
   };
@@ -26,7 +28,7 @@ export default function CheckList({
               type="checkbox"
               id={habit.id}
               checked={habit.completed}
-              onChange={() => handleCheckboxChange(habit.id)}
+              onChange={handleCheckboxChange}
             />
             <label htmlFor={habit.id}>{habit.name}</label>
           </li>
